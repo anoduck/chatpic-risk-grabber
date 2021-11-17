@@ -1,11 +1,13 @@
-import '@tensorflow/tfjs-node-gpu';
-import { Classifier } from "./src/classifier";
+//import * as tf from "@tensorflow/tfjs";
+//import '@tensorflow/tfjs-node';
+//import '@tensorflow/tfjs-node-gpu';
+//import { Classifier } from "./src/classifier";
 import { CPGrabber, CPGrabberOptions } from "./src/grabber";
 
 // main method
 const main = async () => {
   // init media classifier
-  await Classifier.init();
+  //await Classifier.init();
 
   // set config
   const CP_GRABBER_OPTIONS: CPGrabberOptions = {
@@ -32,7 +34,7 @@ const main = async () => {
       '5s',
       '3s'
     ],
-    saveAllMedia: false, // set true to disable keywords filter and save all media
+    saveAllMedia: true, // set true to disable keywords filter and save all media
   };
 
   // run chatpic grabber

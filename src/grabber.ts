@@ -5,7 +5,7 @@ import axios from "axios";
 import fetch from "node-fetch";
 
 import { Helpers } from "./helpers";
-import { Classifier } from "./classifier";
+//import { Classifier } from "./classifier";
 
 export interface CPGrabberOptions {
   room: string;
@@ -37,7 +37,7 @@ export class CPGrabber implements CPGrabberOptions {
   constructor(options?: CPGrabberOptions) {
     Object.assign(this, {...options});
 
-    this.client = SocketIOClient("https://chatpic.org/?EIO=3&transport=websocket", {
+    this.client = SocketIOClient("wss://chatpic.org/?EIO=3&transport=websocket", {
       reconnectionDelayMax: 10000,
       path: '/socket.io'
     });
@@ -95,13 +95,13 @@ export class CPGrabber implements CPGrabberOptions {
       
       fetch(url).then((response) => {
         response.buffer().then(async (imageBuffer) => {
-          if (data.type === 'photo') {
-            data.classification = await Classifier.scanImage(data, imageBuffer)
-
-            if (data.classification.faces && data.classification.faces.length > 0) {
-              foundSample = await Classifier.findSamples(data, imageBuffer);
-            }
-          }
+//          if (data.type === 'photo') {
+//            data.classification = await Classifier.scanImage(data, imageBuffer)
+//
+//            if (data.classification.faces && data.classification.faces.length > 0) {
+//              foundSample = await Classifier.findSamples(data, imageBuffer);
+//            }
+//          }
 
           let savePath = path.join(__dirname, '/../../saves');
     
@@ -125,12 +125,12 @@ export class CPGrabber implements CPGrabberOptions {
             fs.writeFile(metaSavePath, JSON.stringify(data, null, 2), () => {});
           }
 
-          if (foundSample) {
-            console.log(`new media from @${data.ownerNickname} (${data.type}) incoming... we got a sample found! title: ${data.name}`);
-            const filename = path.join(__dirname, '/../../saves/_SUPERRISK', data.filename);
-            fs.writeFile(filename, imageBuffer, () => {});
-            fs.writeFile(`${filename}.meta.json`, JSON.stringify(data, null, 2), () => {});
-          }
+//          if (foundSample) {
+//            console.log(`new media from @${data.ownerNickname} (${data.type}) incoming... we got a sample found! title: ${data.name}`);
+//            const filename = path.join(__dirname, '/../../saves/_SUPERRISK', data.filename);
+//            fs.writeFile(filename, imageBuffer, () => {});
+//            fs.writeFile(`${filename}.meta.json`, JSON.stringify(data, null, 2), () => {});
+//          }
 
           // auto repost in the future ?
           // if (this.data.room._id && this.data.token) {

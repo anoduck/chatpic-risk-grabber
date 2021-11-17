@@ -1,8 +1,8 @@
 import fs from "fs";
 import path from "path";
 
-// import * as tf from '@tensorflow/tfjs-node'; // switch to this if gpu not supported
-import * as tf from '@tensorflow/tfjs-node-gpu';
+import * as tf from '@tensorflow/tfjs-node'; // switch to this if gpu not supported
+//import * as tf from '@tensorflow/tfjs-node-gpu';
 
 import * as nsfw from 'nsfwjs';
 import * as faceapi from 'face-api.js';
